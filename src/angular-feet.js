@@ -4,7 +4,7 @@ angular.module('angularFeet', [])
     .provider('angularFeet', function($httpProvider){
 
         this.configure = function(config) {
-            $httpProvider.defaults.headers.common['auth'] = config.apiKey;
+            $httpProvider.defaults.headers.common.auth = config.apiKey;
             this.config = config
         };
 
