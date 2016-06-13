@@ -5,7 +5,7 @@
     "fer <fer@ferqwerty.com>",
     "Tomás Corral Casas <amischol@gmail.com>"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AngularJS wrapper module for the 10,000ft API",
   "keywords": [
     "10000 feet",
