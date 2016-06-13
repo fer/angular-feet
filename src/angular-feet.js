@@ -1,39 +1,39 @@
 'use strict';
 
+function _api(config, path, params, callback, $http){
+    var parameters = {
+        method: params ? params.method : 'GET',
+        url: config.baseUrl + path
+    };
+
+    if (config.perPage) {
+        if (parameters.method == 'GET') {
+            parameters.url = parameters.url + '?per_page=' + config.perPage;
+        }
+    }
+
+    angular.extend(parameters, params);
+
+    $http(parameters).then(callback, function(response) {
+        throw (response)
+    })
+}
+
 angular.module('angularFeet', [])
     .provider('angularFeet', function($httpProvider){
 
-        this.configure = function(config) {
+        var config = {};
+
+        this.configure = function(userConfig) {
             $httpProvider.defaults.headers.common.auth = config.apiKey;
-            this.config = config
+            config = userConfig
         };
 
         this.$get = function($http) {
-            var self = this;
-
-            function _api(path, params, callback){
-
-                var parameters = {
-                    method: params.method ? params.method : 'GET',
-                    url: self.config.baseUrl + path
-                };
-
-                if (self.config.perPage) {
-                    if (parameters.method == 'GET') {
-                        parameters.url = parameters.url + '?per_page=' + self.config.perPage;
-                    }
-                }
-
-                angular.extend(parameters, params);
-
-                $http(parameters).then(callback, function(response) {
-                    throw (response)
-                })
-            }
 
             return {
                 leaveTypes: function(callback){
-                    _api('/leave_types', null, callback)
+                    _api(config, '/leave_types', null, callback, $http)
                 },
 
                 // https://www.10000ft.com/plans/reference/api-documentation/projects
@@ -41,19 +41,19 @@ angular.module('angularFeet', [])
                 // TODO: filter projects
                 project: {
                     all: function(callback){
-                        _api('/projects', null, callback)
+                        _api(config, '/projects', null, callback, $http)
                     },
                     create: function(params, callback){
-                        _api('/projects', { method: 'POST', params: params }, callback)
+                        _api(config, '/projects', { method: 'POST', params: params }, callback, $http)
                     },
                     delete: function(id, callback) {
-                        _api('/projects/' + id, { method: 'DELETE'}, callback)
+                        _api(config, '/projects/' + id, { method: 'DELETE'}, callback, $http)
                     },
                     get: function(id, callback) {
-                        _api('/projects/' + id, null, callback)
+                        _api(config, '/projects/' + id, null, callback, $http)
                     },
                     timeEntries: function(id, callback) {
-                        _api('/projects/' + id + '/time_entries', null, callback)
+                        _api(config, '/projects/' + id + '/time_entries', null, callback, $http)
                     },
                     update: function(project, callback) {
                         var params = {
@@ -61,10 +61,10 @@ angular.module('angularFeet', [])
                             name: project.name,
                             ends_at: project.ends_at
                         };
-                        _api('/projects/' + project.id, { method: 'PUT', params: params }, callback)
+                        _api(config, '/projects/' + project.id, { method: 'PUT', params: params }, callback, $http)
                     },
                     users: function(id, callback) {
-                        _api('/projects/' + id + '/users', null, callback)
+                        _api(config, '/projects/' + id + '/users', null, callback, $http)
                     }
                 },
 
@@ -72,16 +72,17 @@ angular.module('angularFeet', [])
                 users: {
                     get: function(id, callback){
                         // TODO: optional parameters
-                        _api('/users/' + id , {method: 'GET', params: { fields: 'tags' } }, callback)
+                        _api(config, '/users/' + id , {method: 'GET', params: { fields: 'tags' } }, callback, $http)
                     },
 
                     all: function(callback){
                         // TODO: optional parameters
-                        _api('/users', {method: 'GET', params: { fields: 'tags' } }, callback)
+                        debugger;
+                        _api(config, '/users', {method: 'GET', params: { fields: 'tags' } }, callback, $http)
                     },
 
                     create: function(user, callback) {
-                        _api('/users', { method: 'POST', params: user }, callback)
+                        _api(config, '/users', { method: 'POST', params: user }, callback, $http)
                     },
 
                     // A user cannot be deleted by the API. A user can be archived by setting the optional parameter
@@ -89,7 +90,7 @@ angular.module('angularFeet', [])
                     // You cannot archive the account owner.
 
                     //delete: function(id, callback) {
-                    //    _api('/users/' + id, { method: 'DELETE'}, callback)
+                    //    _api(config, '/users/' + id, { method: 'DELETE'}, callback, $http)
                     //},
 
                     archive: function(id, flag, callback) {
@@ -97,28 +98,28 @@ angular.module('angularFeet', [])
                             archived: flag
                         };
 
-                        _api('/users/' + id, { method: 'PUT', params: params}, callback)
+                        _api(config, '/users/' + id, { method: 'PUT', params: params}, callback, $http)
                     },
 
                     update: function(id, params, callback) {
-                        _api('/users/' + id, { method: 'PUT', params: params }, callback)
+                        _api(config, '/users/' + id, { method: 'PUT', params: params }, callback, $http)
                     },
 
                     tags: {
                         // https://www.10000ft.com/plans/reference/api-documentation/user-tags#top
                         get: function(id, callback) {
-                            _api('/users/' + id + '/tags', {}, callback)
+                            _api(config, '/users/' + id + '/tags', {}, callback, $http)
                         },
                         create: function(id, val, callback) {
-                            _api('/users/' + id + '/tags', { method: 'POST', params: { value: val }}, callback)
+                            _api(config, '/users/' + id + '/tags', { method: 'POST', params: { value: val }}, callback, $http)
                         },
                         delete: function(itemId, tagId, callback) {
-                            _api('/users/' + itemId + '/tags/' + tagId, { method: 'DELETE' }, callback)
+                            _api(config, '/users/' + itemId + '/tags/' + tagId, { method: 'DELETE' }, callback, $http)
                         }
                     },
 
                     assignments: function(id, callback) {
-                        _api('/users/' + id + '/assignments', {}, callback)
+                        _api(config, '/users/' + id + '/assignments', {}, callback, $http)
                     }
                 }
             }

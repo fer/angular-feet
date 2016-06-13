@@ -2,7 +2,7 @@
 *.pid
 *.seed
 .npm
-bower_components
+example/bower_components
 logs
 node_modules
 npm-debug.log*

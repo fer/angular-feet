@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <title>angular-feet</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../bower_components/angular/angular.min.js"></script>
-        <script src="../bower_components/angular-route/angular-route.min.js"></script>
-        <script src="../src/angular-feet.js"></script>
-        <link rel="stylesheet" href="../bower_components/pure/pure-min.css">
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="./../src/angular-feet.js"></script>
+        <link rel="stylesheet" href="bower_components/pure/pure-min.css">
     </head>
     <body ng-app="demo" ng-controller="MainCtrl">
         <div class="pure-g">
@@ -24,13 +24,14 @@
                 </div>
             </div>
             <div class="pure-u-3-5">
-                <h4 class="pure-menu-heading" style="padding-left: 0">{{section.title}} <a href="{{section.docLink}}">to 10Kft docs</a></h4>
-
+                <h4 class="pure-menu-heading" style="padding-left: 0">
+                    {{section.title}} <a href="{{section.docLink}}">to 10Kft docs</a>
+                </h4>
                 <div ng-view></div>
             </div>
         </div>
-        <script src="helpers.js"></script>
-        <script src="constants.js"></script>
-        <script src="app.js"></script>
+        <script src="scripts/helpers.js"></script>
+        <script src="scripts/constants.js"></script>
+        <script src="scripts/app.js"></script>
     </body>
 </html>

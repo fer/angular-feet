@@ -2,11 +2,22 @@
 
 AngularJS wrapper module for the [10,000ft API](https://www.10000ft.com/plans/reference/api-documentation/overview#top).
 
-# Install 
+## Quick start
+
+- Install angular-feet with [bower](https://github.com/bower/bower):
 
 ```
-bower install angular-feet --save
+$ bower install angular-feet --save
 ```
+
+- Include the required libraries in your ```index.html```:
+
+```
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-feet/angular-feet.js"></script>
+```
+
+- Inject ```angularFeetProvider``` provider in your app's config. Also add your 10kft API settings:
 
 ```
 app.config(function(angularFeetProvider) {
@@ -19,7 +30,9 @@ app.config(function(angularFeetProvider) {
 });
 ```
 
-In the root folder:
+- In the root folder:
+
 ```
-http-server
+$ cd angular-feet/example
+$ http-server
 ```
