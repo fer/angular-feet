@@ -20,7 +20,7 @@ function _api(config, path, params, callback, $http){
 }
 
 angular.module('angularFeet', [])
-    .provider('angularFeet', function($httpProvider){
+    .provider('angularFeet', ['$httpProvider', function($httpProvider){
 
         var config = {};
 
@@ -120,4 +120,4 @@ angular.module('angularFeet', [])
                 }
             }
         }
-    });
+    }]);
