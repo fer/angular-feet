@@ -73,7 +73,6 @@ angular.module('angularFeet', [])
 
                     all: function(callback){
                         // TODO: optional parameters
-                        debugger;
                         _api(config, '/users', {method: 'GET', params: { fields: 'tags' } }, callback, $http)
                     },
 

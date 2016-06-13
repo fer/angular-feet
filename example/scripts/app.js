@@ -128,7 +128,6 @@ function usersController($scope, $log, angularFeet, $rootScope) {
     };
 
     $scope.selectUser = function(user){
-        debugger;
         angularFeet.users.get(user.id, function(user){
             $scope.selectedUser = user.data;
             angularFeet.users.tags.get($scope.selectedUser.id, function(tags){
