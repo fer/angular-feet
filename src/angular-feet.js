@@ -35,10 +35,6 @@ angular.module('angularFeet', [])
                 leaveTypes: function(callback){
                     _api(config, '/leave_types', null, callback, $http)
                 },
-
-                // https://www.10000ft.com/plans/reference/api-documentation/projects
-                // TODO: list projects with sorting
-                // TODO: filter projects
                 project: {
                     all: function(callback){
                         _api(config, '/projects', null, callback, $http)

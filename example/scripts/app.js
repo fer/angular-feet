@@ -6,7 +6,7 @@ var deps = [
 ];
 
 apiItems.forEach(function(item){
-    deps.push(item.modCtrl);
+    deps.push(item.modCtrl)
 });
 
 angular
@@ -25,11 +25,11 @@ angular
     })
     .controller('MainCtrl', function ($rootScope) {
         $rootScope.menuItems = apiItems;
-        $rootScope.section = getCurrentItemFromUrl();
+        $rootScope.section = getCurrentItemFromUrl()
     });
 
 var myFunc = function($rootScope){
-    $rootScope.section = getCurrentItemFromUrl();
+    $rootScope.section = getCurrentItemFromUrl()
 };
 
 function phasesController($scope, angularFeet, $rootScope){
@@ -38,8 +38,8 @@ function phasesController($scope, angularFeet, $rootScope){
     $scope.$on('all', function(){
         angularFeet.project.all(function(data){
             $scope.projects = data.data.data;
-            if (!$scope.$$phase) $scope.$apply();
-        });
+            if (!$scope.$$phase) $scope.$apply()
+        })
     });
 
     $scope.$broadcast('all');
@@ -48,7 +48,7 @@ function phasesController($scope, angularFeet, $rootScope){
         angularFeet.project.phases(project.id, function(users) {
             $scope.users = users.data;
             $scope.selectedProject = project;
-            console.log(Object.keys(project));
+            console.log(Object.keys(project))
         })
     }
 }
@@ -59,7 +59,7 @@ function projectsController($scope, $log, angularFeet, $rootScope){
     $scope.$on('all', function(){
         angularFeet.project.all(function(data){
             $scope.projects = data.data.data;
-            if (!$scope.$$phase) $scope.$apply();
+            if (!$scope.$$phase) $scope.$apply()
         });
     });
 
@@ -67,14 +67,14 @@ function projectsController($scope, $log, angularFeet, $rootScope){
 
     $scope.deleteProject = function(project) {
         angularFeet.project.delete(project.id);
-        $scope.$broadcast('all');
+        $scope.$broadcast('all')
     };
 
     $scope.selectProject = function(project) {
         angularFeet.project.users(project.id, function(users) {
             $scope.users = users.data;
             $scope.selectedProject = project;
-            console.log(Object.keys(project));
+            console.log(Object.keys(project))
         })
     };
 
@@ -104,14 +104,14 @@ function usersController($scope, $log, angularFeet, $rootScope) {
             $scope.users = users.data.data;
             $log.info($scope.users);
             if (!$scope.$$phase) $scope.$apply()
-        });
+        })
     });
 
     $scope.$broadcast('all');
 
     $scope.getTags = function(user) {
         angularFeet.users.tags.get(user.id, function(resp) {
-            $log.info(resp.data.data);
+            $log.info(resp.data.data)
         })
     };
 
@@ -123,7 +123,7 @@ function usersController($scope, $log, angularFeet, $rootScope) {
 
     $scope.deleteTag = function(userId, tagId) {
         angularFeet.users.tags.delete(userId, tagId, function(resp){
-            $log.info(resp);
+            $log.info(resp)
         })
     };
 
@@ -132,25 +132,25 @@ function usersController($scope, $log, angularFeet, $rootScope) {
         angularFeet.users.get(user.id, function(user){
             $scope.selectedUser = user.data;
             angularFeet.users.tags.get($scope.selectedUser.id, function(tags){
-                $log.info(tags);
-            });
+                $log.info(tags)
+            })
         })
     };
 
     $scope.createAll = function(){
         usuarios.forEach(function(usuario){
             angularFeet.users.create(usuario, function(newUser){
-                $log.info(newUser);
-            });
-        });
+                $log.info(newUser)
+            })
+        })
     };
 
     $scope.archiveAll = function(){
         angularFeet.users.all(function(users) {
             users.data.data.forEach(function(user){
                 angularFeet.users.archive(user.id, true, function (result) {
-                    $log.info(result);
-                });
+                    $log.info(result)
+                })
             })
         })
     };
@@ -158,20 +158,20 @@ function usersController($scope, $log, angularFeet, $rootScope) {
     $scope.archiveUser = function(user){
         angularFeet.users.archive(user.id, true, function(result){
             $log.info(result);
-            $scope.$broadcast('all');
+            $scope.$broadcast('all')
         })
     }
 }
 
 // ######################################################################
-
 // Module instantiation
+// ######################################################################
 
 apiItems.forEach(function(item){
     try {
         angular.module(item.modCtrl, []).controller(item.ctrl, eval(item.ctrl));
-        console.info('Loaded ', item.ctrl);
+        console.info('Loaded ', item.ctrl)
     } catch(e) {
-        angular.module(item.modCtrl, []).controller(item.ctrl, myFunc);
+        angular.module(item.modCtrl, []).controller(item.ctrl, myFunc)
     }
 });
