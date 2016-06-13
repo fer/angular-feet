@@ -3,8 +3,9 @@
   "homepage": "https://github.com/fer/angular-feet",
   "authors": [
     "fer <fer@ferqwerty.com>",
-    ""
+    "Tomás Corral Casas <amischol@gmail.com>"
   ],
+  "version": "0.0.1",
   "description": "AngularJS wrapper module for the 10,000ft API",
   "keywords": [
     "10000 feet",
