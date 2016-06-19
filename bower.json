@@ -3,7 +3,7 @@
   "homepage": "https://github.com/fer/angular-feet",
   "authors": [
     "fer <fer@ferqwerty.com>",
-    ""
+    "tcorral <amischol@gmail.com>"
   ],
   "description": "AngularJS wrapper module for the 10,000ft API",
   "keywords": [
@@ -14,7 +14,7 @@
     "feet",
     "wrapper"
   ],
-  "main": "src/angular-feet.js",
+  "main": "src/index.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
