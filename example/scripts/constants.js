@@ -1,5 +1,5 @@
 var config10Kft = {
-    apiKey: 'Tjh5c1JEVUFUdkNhS3B5S0dIc0tOQmdnQjZwTmpCb2FhaGxQLzlXYnc0RmtzanpoMEZLbFBpdkFoejFvCllrL1lYTVdtNXo4TXozTzBOTGk5R0ZpaVpKeTlBVWNOOXBGOTFPb3lKK05oUUlicW9lbW10WWxpR1NsOQpsbGZIQlJWYwo=',
+    apiKey: 'bzhBenVpQnY1UnJkTHNqTGdwNTQ2ejYxZldOcTJQbEROK3NIQUJETWsydXdtQjRYalBwblcybVpXZmIvCmEvYWNQWHlMQkxaejdSRGY4MlhBME56dGNGd2lOS3pLRERHYmhJQW5Wa1hBYzhlUGhKcHpIT1lCZlc0VwpTVy9zWWlhQgo=',
     baseUrl: 'https://vnext-api.10000ft.com/api/v1',
     perPage: 1000
 };
