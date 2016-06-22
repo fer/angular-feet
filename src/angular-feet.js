@@ -8,7 +8,7 @@ function _api(config, path, params, callback, $http){
 
     if (config.perPage) {
         if (parameters.method == 'GET') {
-            parameters.url = parameters.url + '?per_page=' + config.perPage;
+            parameters.url = parameters.url + '?per_page=' + config.perPage + '&auth=' + config.apiKey;
         }
     }
 
@@ -20,12 +20,11 @@ function _api(config, path, params, callback, $http){
 }
 
 angular.module('angularFeet', [])
-    .provider('angularFeet', ['$httpProvider', function($httpProvider){
+    .provider('angularFeet', ['$httpProvider', function(){
 
         var config = {};
 
         this.configure = function(userConfig) {
-            $httpProvider.defaults.headers.common.auth = config.apiKey;
             config = userConfig
         };
 
