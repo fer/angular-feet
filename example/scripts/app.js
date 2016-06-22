@@ -95,6 +95,20 @@ function projectsController($scope, $log, angularFeet, $rootScope){
     });
 }
 
+
+function assignmentsController($scope, $rootScope, angularFeet, $log) {
+    $rootScope.section = getCurrentItemFromUrl();    
+
+    angularFeet.users.assignments.all('251312', function(data){
+        $log.info('Assignments: ', data);
+        $scope.assignments = data.data.data;
+    });
+
+    $scope.selectAssignment = function(assignment) {        
+        $scope.selectedAssignment = assignment;
+    }
+};
+
 function usersController($scope, $log, angularFeet, $rootScope) {
 
     $rootScope.section = getCurrentItemFromUrl();
