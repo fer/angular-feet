@@ -1,7 +1,7 @@
 var config10Kft = {
     apiKey: 'bzhBenVpQnY1UnJkTHNqTGdwNTQ2ejYxZldOcTJQbEROK3NIQUJETWsydXdtQjRYalBwblcybVpXZmIvCmEvYWNQWHlMQkxaejdSRGY4MlhBME56dGNPV1cyekVXMHVYVXJxOFpuVVRZQ1VBNXhmamw5K2YvYmt0Ywpnc1dkQmV6dgo=',
     baseUrl: 'https://api.10000ft.com/api/v1',
-    perPage: 1
+    perPage: 1000
 };
 
 var apiItems = [];
