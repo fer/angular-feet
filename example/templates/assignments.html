@@ -2,6 +2,37 @@
     <thead>
     <tr>
         <th>id</th>
+        <th>hire_date</th>
+        <th>({{users.length}}) Display name</th>
+        <th>Role</th>
+        <th>Discipline</th>
+        <th>Location</th>
+        <th>Mobile Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.hire_date}}</td>
+            <td><a href='' ng-click="getAssignmentPerUser(user)">{{user.display_name}}</a></td>
+            <td>{{user.role}}</td>
+            <td>{{user.discipline}}</td>
+            <td>{{user.location}}</td>
+            <td>{{user.mobile_phone}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<pre>
+    {{ selectedUser | json}}
+</pre>
+
+Assignments:
+
+<table class="pure-table pure-table-horizontal">
+    <thead>
+    <tr>
+        <th>id</th>
         <th>user_id</th>
         <th>starts at</th>
         <th>ends at</th>
@@ -17,6 +48,19 @@
     </tbody>
 </table>
 
-<pre>
-    {{ selectedAssignment | json}}
-</pre>
+Projects:
+
+<table class="pure-table pure-table-horizontal">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="project in projects" >
+            <td>{{project.id}}</td>
+            <td>{{project.name}}</td>
+        </tr>
+    </tbody>
+</table>

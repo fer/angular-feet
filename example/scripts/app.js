@@ -53,6 +53,21 @@ function phasesController($scope, angularFeet, $rootScope){
     }
 }
 
+function userPerProjectController($scope, $log, angularFeet) {    
+    angularFeet.project.all(function(data){
+        $scope.projects = data.data.data;
+        if (!$scope.$$phase) $scope.$apply()
+    })
+
+    $scope.getUsersPerProject = function(project) {        
+        angularFeet.project.users(project.id, function(data){
+
+            $log.info('Users: ', data);
+            $scope.users = data.data.data;
+        });
+    }
+}
+
 function projectsController($scope, $log, angularFeet, $rootScope){
     $rootScope.section = getCurrentItemFromUrl();
 
@@ -98,14 +113,48 @@ function projectsController($scope, $log, angularFeet, $rootScope){
 
 function assignmentsController($scope, $rootScope, angularFeet, $log) {
     $rootScope.section = getCurrentItemFromUrl();    
-
-    angularFeet.users.assignments.all('251312', function(data){
-        $log.info('Assignments: ', data);
-        $scope.assignments = data.data.data;
+    
+    angularFeet.users.all(function(users){
+        $scope.users = users.data.data;
+        $log.info($scope.users);
     });
 
     $scope.selectAssignment = function(assignment) {        
         $scope.selectedAssignment = assignment;
+    };
+
+    $scope.getAssignmentPerUser = function(user) {        
+        angularFeet.users.assignments.all(user.id, function(data){
+
+            $log.info('Assignments: ', data);
+            $scope.assignments = data.data.data;
+        });
+        angularFeet.users.projects(user.id, function(data){
+                $log.info('Projects: ', data);
+                //remove duplicated ones
+                var uniq = data.data.data.reduce(function(accum, current){
+                      function indexOfProperty (accum, current){
+                          for (var i=0;i<accum.length;i++){
+                              if(accum[i].assignable_id == current.assignable_id){
+                                   return i;
+                               }
+                          }
+                         return -1;
+                      }
+
+                      if (indexOfProperty(accum,current) < 0 ) accum.push(current);
+                        return accum;
+                    },[]);
+                //search for the projects
+                $scope.projects = [];
+                for (var i=0;i<uniq.length;i++){
+                    angularFeet.project.get(uniq[i].assignable_id, function(data){
+                        $scope.projects.push(data.data)
+                    });
+                }              
+            });
+
+
     }
 };
 

@@ -111,7 +111,13 @@ angular.module('angularFeet', [])
                             _api(config, '/users/' + itemId + '/tags/' + tagId, { method: 'DELETE' }, callback, $http)
                         }
                     },
-                                    //https://www.10000ft.com/plans/reference/api-documentation/assignments#top
+
+                    projects: function (userId, callback) {
+                        _api(config, '/users/' + userId + '/assignments/', null, callback, $http)
+
+                    },
+                
+                //https://www.10000ft.com/plans/reference/api-documentation/assignments#top
                 //                 {
                 //     "data": [
                 //         {
@@ -141,7 +147,7 @@ angular.module('angularFeet', [])
                 assignments: {
                         // TODO: optional parameters: from and to
                         get: function(userId, assignmentId, callback) {
-                            _api(config, '/users/' + userId + '/assignments/' + assignmentId, {}, callback, $http)
+                            _api(config, '/users/' + userId + '/assignments/' + assignmentId, null, callback, $http)
                         },
                         // TODO: optional parameters: from and to
                         all: function(userId, callback) {
