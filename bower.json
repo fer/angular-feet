@@ -15,7 +15,7 @@
     "feet",
     "wrapper"
   ],
-  "main": "src/angular-feet.js",
+  "main": "src/index.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
