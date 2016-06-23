@@ -19,6 +19,15 @@ function _api(config, path, params, callback, $http){
     })
 }
 
+function indexOfProperty (accum, current){
+    for (var i=0;i<accum.length;i++){
+        if(accum[i].assignable_id == current.assignable_id){
+            return i;
+        }
+    }
+    return -1;
+}
+
 angular.module('angularFeet', [])
     .provider('angularFeet', ['$httpProvider', function(){
 
@@ -112,38 +121,26 @@ angular.module('angularFeet', [])
                         }
                     },
 
-                    projects: function (userId, callback) {
-                        _api(config, '/users/' + userId + '/assignments/', null, callback, $http)
+                    projects: function (userId, loadedProjects, callback) {
+                        _api(config, '/users/' + userId + '/assignments/', null, function(data){
+                            var userProjects = [],
+                                uniqAssignment = data.data.data.reduce(function(accum, current){
+                                    if (indexOfProperty(accum,current) < 0 ) accum.push(current);
+                                    return accum;
+                                },[]);
+
+                            uniqAssignment.forEach(function(assignment){
+                                loadedProjects.forEach(function(loadedProject){
+                                    if (assignment.assignable_id === loadedProject.id) {
+                                        userProjects.push(loadedProject);
+                                    }
+                                })
+                            });
+
+                            callback(userProjects)
+                        }, $http)
 
                     },
-                
-                //https://www.10000ft.com/plans/reference/api-documentation/assignments#top
-                //                 {
-                //     "data": [
-                //         {
-                //             "id":889,
-                //             "allocation_mode":"percent",
-                //             "percent":1.0 /* only present when allocation_mode is percent */,
-                //             "hours_per_day":8 /* only present when allocation_mode is hours_per_day */,
-                //             "fixed_hours":8 /* only present when allocation_mode is fixed */,
-                //             "user_id":5612,
-                //             "assignable_id":123,
-                //             "ends_at":"2013-10-07",
-                //             "starts_at":"2013-10-03",
-                //             "bill_rate":1.0,
-                //             "bill_rate_id":0
-                //             "repetition_id:" 886,
-                //         },
-                //         ...
-                //     ],
-                //     "paging": {
-                //         "next": null,
-                //         "page": 1,
-                //         "per_page": 20,
-                //         "previous": null,
-                //         "self": "/api/v1/users/1/assignments?user_id=1&per_page=20&page=1"
-                //     }
-                // }
                 assignments: {
                         // TODO: optional parameters: from and to
                         get: function(userId, assignmentId, callback) {
