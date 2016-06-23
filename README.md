@@ -36,3 +36,26 @@ app.config(function(angularFeetProvider) {
 $ cd angular-feet/example
 $ http-server
 ```
+
+
+# Building the project:
+
+## Pre-requisites
+
+* jspm
+* jspm-bower-endpoint
+
+## Install
+
+```
+npm install -g jspm
+npm install -g jspm-bower-endpoint
+jspm registry create bower jspm-bower-endpoint
+jspm install
+``
+
+## Build
+```
+jspm bundle-sfx src/index dist/index.js
+```
+#### TODO include an automatic build process

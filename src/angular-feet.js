@@ -141,6 +141,7 @@ angular.module('angularFeet', [])
                         }, $http)
 
                     },
+
                 assignments: {
                         // TODO: optional parameters: from and to
                         get: function(userId, assignmentId, callback) {
