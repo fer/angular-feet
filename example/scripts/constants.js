@@ -7,22 +7,22 @@ var config10Kft = {
 var apiItems = [];
 
 var apiSections = [
-    'API Documentation',
+    /*'API Documentation',*/
     'Projects',
-    'Phases',
-    'Leave Types',
-    'Project Budgets',
-    'Bill Rates by Project',
+    /*'Phases',*/
+    /*'Leave Types',*/
+    /*'Project Budgets',*/
+    /*'Bill Rates by Project',*/
     'Users',
-    'User Status',
+    /*'User Status',*/
     'Assignments',
-    'User per Project',
-    'Time Entries by User',
-    'Time Entries by Project',
-    'Expense Entries',
-    'Budget Item Categories',
-    'Tags per User',
-    'Tags per Project'
+    'User per Project'
+    /*'Time Entries by User',*/
+    /*'Time Entries by Project',*/
+    /*'Expense Entries',*/
+    /*'Budget Item Categories',*/
+    /*'Tags per User',*/
+    /*'Tags per Project'*/
 ];
 
 apiSections.forEach(function(section){
