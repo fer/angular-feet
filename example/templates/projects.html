@@ -1,138 +1,20 @@
-
-
-<form class="pure-form">
-    <h3>Filters</h3>
-
-    <label for="from">from</label>
-    <input id="from" ng-model="filter.from" type="date" title="get projects that start on or after this date">
-
-    <label for="to">to</label>
-    <input id="to" ng-model="filter.to" type="date" title="get projects that end on or before this date">
-
-    <label for="fields">fields</label>
-    <input id="fields" ng-model="filter.fields" type="text" title="a comma separated list, optional values [ \“tags\”, \“budget_items\”, \“project_state\” , \“phase_count\” ] Will add additional fields to the output">
-
-    <label for="filter_field">filter_field</label>
-    <input id="filter_field" ng-model="filter.filter_field" type="text" title="Specifies the property to filter on. “project_state” is the only supported value">
-
-    <label for="filter_list">filter_list</label>
-    <input id="filter_list" ng-model="filter.filter_list" type="text" title="The value of \“filter_field\” to match, outputs will be projects with state matching this value. Possible values: Internal, Tentative, Confirmed">
-
-    <label for="sort_field">sort_field</label>
-    <input id="sort_field" ng-model="filter.sort_field" type="text" title="Field to sort the return document. Possible values: created or updated">
-
-    <label for="sort_order">sort_order</label>
-    <input id="sort_order" ng-model="filter.sort_order" type="text" title="order to sort the results on. Possible values: ascending or descending">
-
-    <label for="project_code">project_code</label>
-    <input id="project_code" ng-model="filter.project_code" type="text" title="project code to find, exact match">
-
-    <label for="phase_name">phase_name</label>
-    <input id="phase_name" ng-model="filter.phase_name" type="text" title="phase name to find, exact match">
-
-    <label for="with_archived">with_archived</label>
-    <input id="with_archived" ng-model="filter.with_archived" type="checkbox" title="true to include deleted/archived projects">
-
-    <label for="with_phases">with_phases</label>
-    <input id="with_phases" ng-model="filter.with_phases" type="checkbox" title="true to include phases ( child projects )">
-
-    <label for="per_page">per_page</label>
-    <input id="per_page" ng-model="filter.per_page" type="number" title="Parameters for pagination. Default values are per_page = 20 , page = 1 ( the first )">
-
-    <label for="page">page</label>
-    <input id="page" ng-model="filter.page" type="number" title="Parameters for pagination. Default values are per_page = 20 , page = 1 ( the first )">
-
-    <label for="archived">archived</label>
-    <input id="archived" ng-model="filter.archived" type="checkbox" title="true to archive/false to unarchive">
-</form>
-
-<table class="pure-table pure-table-horizontal">
-    <thead>
-    <tr>
-
-        <th>archived</th>
-        <th>archived_at</th>
-        <th>description</th>
-        <th>name</th>
-        <th>parent_id</th>
-        <th>phase_name</th>
-        <th>project_code</th>
-        <th>secureurl</th>
-        <th>secureurl_expiration</th>
-        <th>settings</th>
-        <th>timeentry_lockout</th>
-        <th>ends_at</th>
-        <th>starts_at</th>
-        <th>deleted_at</th>
-        <th>created_at</th>
-        <th>updated_at</th>
-        <th>use_parent_bill_rates</th>
-        <th>thumbnail</th>
-        <th>type</th>
-        <th>has_pending_updates</th>
-        <th>client</th>
-        <th>project_state</th>
-        <th>tags</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="project in projects">
-        <td>{{project.archived}}</td>
-        <td>{{project.archived_at}}</td>
-        <td>{{project.description}}</td>
-        <td>{{project.name}}</td>
-        <td>{{project.parent_id}}</td>
-        <td>{{project.phase_name}}</td>
-        <td>{{project.project_code}}</td>
-        <td>{{project.secureurl}}</td>
-        <td>{{project.secureurl_expiration}}</td>
-        <td>{{project.settings}}</td>
-        <td>{{project.timeentry_lockout}}</td>
-        <td>{{project.ends_at}}</td>
-        <td>{{project.starts_at}}</td>
-        <td>{{project.deleted_at}}</td>
-        <td>{{project.created_at}}</td>
-        <td>{{project.updated_at}}</td>
-        <td>{{project.use_parent_bill_rates}}</td>
-        <td>{{project.tdumbnail}}</td>
-        <td>{{project.type}}</td>
-        <td>{{project.has_pending_updates}}</td>
-        <td>{{project.client}}</td>
-        <td>{{project.project_state}}</td>
-        <td>{{project.tags}}</td>
-
-        <td><a ng-click="selectProject(project)">select</a></td>
-        <td><a ng-click="deleteProject(project)">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
-
-<hr>
-
-<form class="pure-form pure-form-stacked">
-    <fieldset>
-
-        [
-        ]
-
-
-        <h3>Project: {{selectedProject.name}}</h3>
-
-        <label for="client">Client</label>
-        <input id="client" type="text" placeholder="Client" ng-model="selectedProject.client">
-
-        <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Name" ng-model="selectedProject.name">
-
-
-        <label for="project_state">Project State</label>
-        <input id="project_state" type="text" placeholder="Name" ng-model="selectedProject.project_state">
-
-        <label for="created_at">Created at</label>
-        <input id="created_at" type="datetime" ng-model="selectedProject.created_at">
-
-        <button class="pure-button pure-button-primary" ng-click="createProject()">create project</button>
-        <button type="submit" class="pure-button pure-button-primary">Sign in</button>
-        <button type="submit" ng-click="updateProject(selectedProject)">Update</button>
-    </fieldset>
-</form>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ProjectId</th>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="project in projects">
+            <td>{{project.id}}</td>
+            <td><a href='' ng-click="getUsersPerProject(project)">{{project.name}}</a></td>
+            <td>{{project.starts_at}}</td>
+            <td>{{project.ends_at}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

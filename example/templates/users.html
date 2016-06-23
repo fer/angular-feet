@@ -1,21 +1,20 @@
-<a href="" ng-click="createAll()">Create All</a>
-<a href="" ng-click="archiveAll()">Archive All</a>
+<!--<a href="" ng-click="createAll()">Create All</a>
+<a href="" ng-click="archiveAll()">Archive All</a>-->
 
-<table class="pure-table pure-table-horizontal">
-    <thead>
-    <tr>
-        <th>thumbnail</th>
-        <th>index</th>
-        <th>email</th>
-        <th>hire_date</th>
-        <th>({{users.length}}) Display name</th>
-        <th>Role</th>
-        <th>Discipline</th>
-        <th>Location</th>
-        <th>Mobile Phone</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>UserId</th>
+            <th>Hiring Date</th>
+            <th>Display name</th>
+            <th>Role</th>
+            <th>Discipline</th>
+            <th>Location</th>
+            <th>Mobile Phone</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr ng-repeat="user in users">
             <td>{{user.id}}</td>
             <td>{{user.hire_date}}</td>
@@ -23,23 +22,9 @@
             <td>{{user.role}}</td>
             <td>{{user.discipline}}</td>
             <td>{{user.location}}</td>
-            <td>
-                <ul>
-                    <li ng-repeat="tag in user.tags.data">
-                        {{tag.value}}
-                        <a href="" ng-click="deleteTag(user.id, tag.id)">del</a>
-                    </li>
-                </ul>
-            </td>
-            <td>
-                <a href="" ng-click="createTag(user)">createTag</a>
-                <a href="" ng-click="getTags(user)">getTags</a>
-            </td>
             <td>{{user.mobile_phone}}</td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
-<pre>
-    {{ selectedUser | json}}
-</pre>
