@@ -12580,6 +12580,14 @@ $__System.registerDynamic("6", [], true, function($__require, exports, module) {
       });
     };
   }
+  function indexOfProperty(accum, current) {
+    for (var i = 0; i < accum.length; i++) {
+      if (accum[i].assignable_id == current.assignable_id) {
+        return i;
+      }
+    }
+    return -1;
+  }
   function angularFeetProvider($httpProvider) {
     var config = {};
     this.configure = function(userConfig) {
@@ -12673,6 +12681,24 @@ $__System.registerDynamic("6", [], true, function($__require, exports, module) {
             delete: function(itemId, tagId, callback) {
               return api('/users/' + itemId + '/tags/' + tagId, callback, {method: 'DELETE'});
             }
+          },
+          projects: function(userId, loadedProjects, callback) {
+            return api('/users/' + userId + '/assignments', function(data) {
+              var userProjects = [],
+                  uniqAssignment = data.data.data.reduce(function(accum, current) {
+                    if (indexOfProperty(accum, current) < 0)
+                      accum.push(current);
+                    return accum;
+                  }, []);
+              uniqAssignment.forEach(function(assignment) {
+                loadedProjects.forEach(function(loadedProject) {
+                  if (assignment.assignable_id === loadedProject.id) {
+                    userProjects.push(loadedProject);
+                  }
+                });
+              });
+              callback(userProjects);
+            });
           },
           assignments: {
             get: function(userId, assignmentId, callback) {

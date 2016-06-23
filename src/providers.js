@@ -22,6 +22,15 @@ function getAPI(config, $http) {
   }
 }
 
+function indexOfProperty(accum, current) {
+    for (var i = 0; i < accum.length; i++) {
+        if (accum[i].assignable_id == current.assignable_id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 function angularFeetProvider($httpProvider) {
 
   var config = {};
@@ -119,7 +128,7 @@ function angularFeetProvider($httpProvider) {
         },
 
         projects: function (userId, loadedProjects, callback) {
-          return api(config, '/users/' + userId + '/assignments/', null, function(data){
+          return api('/users/' + userId + '/assignments', function(data){
             var userProjects = [],
                 uniqAssignment = data.data.data.reduce(function(accum, current){
                   if (indexOfProperty(accum,current) < 0 ) accum.push(current);
@@ -135,7 +144,7 @@ function angularFeetProvider($httpProvider) {
             });
 
             callback(userProjects)
-          }, $http)
+          })
 
         },
 
