@@ -14,7 +14,7 @@ $ bower install angular-feet --save
 
 ```
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-feet/angular-feet.js"></script>
+<script src="bower_components/angular-feet/dist/index.js"></script>
 ```
 
 - Inject ```angularFeetProvider``` provider in your app's config. Also add your 10kft API settings:
