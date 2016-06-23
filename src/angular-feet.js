@@ -45,7 +45,7 @@ angular.module('angularFeet', [])
                 },
                 project: {
                     all: function(callback){
-                        _api(config, '/projects', null, callback, $http)
+                        _api(config, '/projects', {method: 'GET', params: { fields: 'tags' } }, callback, $http)
                     },
                     create: function(params, callback){
                         _api(config, '/projects', { method: 'POST', params: params }, callback, $http)
